@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XSS Learn</title>
+</head>
+<body>
+<h1>Welcome {input}</h1>
+<form>
+    <label for="input">Name</label>
+    <input type="text" id="input">
+    <button id="submitButton">Submit</button>
+</form>
+<script>
+    const inputElement = document.getElementById("input");
+
+    const submitButton = document.getElementById("submitButton");
+
+    submitButton.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        const inputValue = inputElement.value;
+
+        const url = `/first_xss?name=${encodeURIComponent(inputValue)}`;
+
+        window.location.href = url;
+    });
+</script>
+</body>
+</html>
